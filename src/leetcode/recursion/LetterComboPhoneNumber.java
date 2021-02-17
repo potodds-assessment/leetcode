@@ -8,7 +8,7 @@ import java.util.Map;
 /*
 Completed: 2/16/2021
 1) beats 30.91% performance
-2) beats 59.77& for memory usage 
+2) beats 59.77% for memory usage 
  */
 
 /*

@@ -3,7 +3,7 @@ package leetcode.tree_graphs;
 /*
 Completed: 2/16/2021
 1) beats 100% performance
-2) beats 89.69& for memory usage 
+2) beats 89.69% for memory usage 
  */
 
 /*
