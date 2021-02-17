@@ -1,5 +1,10 @@
 package leetcode.linked_lists;
 
+/*
+Not Completed: 2/15/2021
+1) beats performance
+2) beats for memory usage 
+ */
 
 /*
 You are given two non-empty linked lists representing two non-negative integers. 

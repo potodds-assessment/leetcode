@@ -1,4 +1,11 @@
 package leetcode.arrays_strings;
+
+/*
+Completed: 2/15/2021
+1) beats 24.57% performance
+2) beats 55.85% for memory usage 
+ */
+
 /*
 Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).
 
@@ -29,10 +36,6 @@ Output: 0
 
 Input: s = "-91283472332"
 Output: -2147483648
-
-1. performance > 24.57%
-2. memory < 55.85%
-
  */
 public class Atoi {
 	
