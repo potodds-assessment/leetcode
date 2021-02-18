@@ -49,7 +49,11 @@ public class FirstUniqCharInString {
     }	
 
     /*
-     * Optimal
+     * Optimal.
+     * 
+     * 1. iter through alphabet a to z
+     * 2. check to see if indexOf == lastIndexOf, if so, unique otherwise not unique
+     * 3. int result holds smallest index
      */
     public int firstUniqChar1(String s) {        
         if(s == null || s.length() == 0)
