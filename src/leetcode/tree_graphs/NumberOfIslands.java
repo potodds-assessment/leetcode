@@ -39,6 +39,7 @@ public class NumberOfIslands {
 	
 	/*
 	 iterative method only goes one level deep. Will fail on this case.  
+	 Or any case where there is an elongated island
 	 
     	char[][] grid = new char[][] {
     		{'1','0','1','1','1'},
