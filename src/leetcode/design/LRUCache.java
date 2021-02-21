@@ -50,7 +50,7 @@ At most 3 * 104 calls will be made to get and put.
  */
 public class LRUCache {
 	
-	AtomicLong counter = new AtomicLong();
+	AtomicLong counter = new AtomicLong(); 
 
 	PriorityQueue<LRKey> pq = new PriorityQueue<>(new Comparator() {
 		@Override
