@@ -1,6 +1,9 @@
 package leetcode.others;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 /*
 There are 8 prison cells in a row, and each cell is either occupied or vacant.
@@ -36,6 +39,21 @@ cells[i] is in {0, 1}
  */
 public class PrisonCellsAfterNDays {
 	
+	List<int[]> lookupList = new ArrayList<>();
+	
+	public boolean doesArrayRepeat(int[] compareArray) {		
+		for(int[] currArr : lookupList) {
+			if (Arrays.compare(compareArray, currArr) == 0) {
+				return true;
+			}
+		}		
+		return false;		
+	}
+	
+	public int[] getAnswer(int numRepeat) {
+		return lookupList.get(numRepeat % lookupList.size());
+	}
+	
     public int[] prisonAfterNDays(int[] cells, int N) {
     	if ( N == 0 || cells == null || cells.length == 0 )
     		return null;
@@ -43,37 +61,31 @@ public class PrisonCellsAfterNDays {
     	boolean leftCellOccupied = false;
     	boolean rightCellOccupied = false;
 
-    	int[] answer = new int[cells.length]; 
+    	int[] answer = null; 
     	for(int i=0; i<N; i++) {
     		for(int y=1; y<(cells.length-1); y++) {
-//    			leftCellOccupied = cells[y-1] == 1 ? true : false ;
-//    			rightCellOccupied = cells[y+1] == 1 ? true : false ;
-//    		
-//    			if (( leftCellOccupied && rightCellOccupied ) || ( !leftCellOccupied && !rightCellOccupied ))
-//    				answer[y] = 1;
-//    			else
-//    				answer[y] = 0;
-    			answer[y] = (( (cells[y-1] == 1) && (cells[y+1] == 1) ) || ( !(cells[y-1] == 1) && !(cells[y+1] == 1) )) ? 1 : 0;
-    		}
-
-    		int[] flip = cells;
-    		cells = answer;
-    		answer = flip;
-
-    		if ( Arrays.compare(cells, answer) == 0 )
-    			break;
+    			answer = new int[cells.length];
+    			
+    			leftCellOccupied = cells[y-1] == 1 ? true : false ;
+    			rightCellOccupied = cells[y+1] == 1 ? true : false ;
     		
-    		answer[0] = 0;
-    		answer[cells.length-1] = 0;
-  
-//    		System.out.println(Arrays.toString(cells));
+    			if (( leftCellOccupied && rightCellOccupied ) || ( !leftCellOccupied && !rightCellOccupied ))
+    				answer[y] = 1;
+    			else
+    				answer[y] = 0;
+    			
+    			if ( doesArrayRepeat(answer) ) {
+    				return getAnswer(N);
+    			} else
+    				lookupList.add(answer);
+    		}
     	}
     	return cells;
     }
 	
 	public void run() {
-		System.out.println(Arrays.toString(prisonAfterNDays(new int[] {0, 1, 0, 1, 1, 0, 0, 1}, 7)));
-//		System.out.println(Arrays.toString(prisonAfterNDays(new int[] {1,0,0,1,0,0,1,0}, 1000000000)));
+//		System.out.println(Arrays.toString(prisonAfterNDays(new int[] {0, 1, 0, 1, 1, 0, 0, 1}, 7)));
+		System.out.println(Arrays.toString(prisonAfterNDays(new int[] {1,0,0,1,0,0,1,0}, 1000000000)));
 	}
 
 	public static void main(String[] args) {
