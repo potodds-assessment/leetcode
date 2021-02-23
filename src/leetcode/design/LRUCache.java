@@ -52,20 +52,17 @@ public class LRUCache {
 	
 	AtomicLong counter = new AtomicLong(); 
 
-	PriorityQueue<LRKey> pq = new PriorityQueue<>(new Comparator() {
+	PriorityQueue<LRKey> pq = new PriorityQueue<>(new Comparator<LRKey>() {
 		@Override
-		public int compare(Object o1, Object o2) {
+		public int compare(LRKey o1, LRKey o2) {
 			if ( o1 == o2 ) return 0;
-			LRUCache.LRKey o1Key = (LRUCache.LRKey)o1;
-			LRUCache.LRKey o2Key = (LRUCache.LRKey)o2;
 			
-			if ( o1Key.lastUsed > o2Key.lastUsed )
+			if ( o1.lastUsed > o2.lastUsed )
 				return 1;
-			else if ( o1Key.lastUsed < o2Key.lastUsed )
+			else if ( o1.lastUsed < o2.lastUsed )
 				return -1;
 			else 
 				return 0;
-			
 		}});
 
 	Map<Integer, LRKey> keyMapLookup = new HashMap<>();
