@@ -1,6 +1,12 @@
 package leetcode.linked_lists;
 
 /*
+Completed: 2/24/2021
+1) beats 100.00% performance
+2) beats 13.31% for memory usage 
+ */
+
+/*
 A linked list of length n is given such that each node contains an additional random pointer, 
 which could point to any node in the list, or null.
 
@@ -49,48 +55,50 @@ import java.util.Map;
 public class CopyListWithRandomPointer {
 
 	Map<Node, Node> lookupMap = new HashMap<>();
-//	Node[] lookupMap = new Node[20000];
 	
     public Node copyRandomList(Node head) {
+    	if ( head == null )
+    		return head;
 
     	Node newList = null;
     	Node header = null;
     	Node ptr = head;
-    	int index = 0;
     	do {
     		if ( newList == null ) {
     			newList = new Node(ptr.val);
     			if ( ptr.random != null ) {
-    				newList.random = new Node(ptr.random.val);
-    				lookupMap.put(newList.random.val, newList.random);
+    				Node randomPtr = lookupMap.get(ptr.random);
+    				if ( randomPtr == null && ptr.random != ptr ) {
+    					newList.random = new Node(ptr.random.val);
+    					lookupMap.put(ptr.random, newList.random);
+    				} else 
+    					newList.random = ptr.random == ptr ? newList : randomPtr;
     			} else
     				newList.random = null;
-
     			
-    			lookupMap.put(newList.val, newList);
+    			lookupMap.put(ptr, newList);
     			header = newList;
     		} else {
-				Node newNode = lookupMap.get(ptr.val);
-				if ( newNode == null ) {
+				Node ptrNode = lookupMap.get(ptr);
+				if ( ptrNode == null ) {
 					newList.next = new Node(ptr.val);
-					lookupMap.put(ptr.val, newList.next);
+					lookupMap.put(ptr, newList.next);
 				} else
-					newList.next = newNode;
+					newList.next = ptrNode;
     			newList = newList.next;
     			
     			if ( ptr.random != null ) {
-    				Node randomNode = lookupMap.get(ptr.random.val);
-    				if ( randomNode == null ) {
+    				Node randomPtr = lookupMap.get(ptr.random);
+    				if ( randomPtr == null && ptr.random != ptr ) {
     					newList.random = new Node(ptr.random.val);
-        				lookupMap.put(ptr.random.val, newList.random);
+        				lookupMap.put(ptr.random, newList.random);
     				} else 
-    					newList.random = randomNode;
+    					newList.random = ptr.random == ptr ? newList : randomPtr;
     			} else
     				newList.random = null;
     		}
 
     		ptr = ptr.next;
-    		index++;
     	} while( ptr != null );
     	
         return header;
@@ -114,16 +122,19 @@ public class CopyListWithRandomPointer {
 //    	e.next = null;
 //    	e.random = a;
 
-    	Node a = new Node(3);
-    	Node b = new Node(3);
-    	Node c = new Node(3);
+//    	Node a = new Node(3);
+//    	Node b = new Node(3);
+//    	Node c = new Node(3);
+//    	
+//    	a.next = b;
+//    	a.random = null;
+//    	b.next = c;
+//    	b.random = a;
+//    	c.next = null;
+//    	c.random = null;
     	
-    	a.next = b;
-    	a.random = null;
-    	b.next = c;
-    	b.random = a;
-    	c.next = null;
-    	c.random = null;
+    	Node a = new Node(1);
+    	a.random = a;
 
     	Node ptr = copyRandomList(a);
     	do {
