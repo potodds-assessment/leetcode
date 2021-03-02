@@ -1,6 +1,15 @@
 package leetcode.sort_search;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+/*
+Completed: 3/2/2021
+1) beats 28.74% performance (kClosest2)
+2) beats 26.04% for memory usage  (kClosest2)
+ */
 
 /*
 We have a list of points on the plane.  Find the K closest points to the origin (0, 0).
@@ -28,19 +37,81 @@ Note:
  */
 public class KClosestPointsToOrigin {
 
-    public int[][] kClosest(int[][] points, int K) {
+	Queue<int[]> pQueue = new PriorityQueue<>(100, new Comparator<int[]>() {
+		@Override
+		public int compare(int[] o1, int[] o2) {
+			if ( o1.length < 2 || o2.length < 2 )
+				return 0;
+				
+			double eDistanceO1 = Math.sqrt( Math.pow(o1[0]-0, 2) + Math.pow(o1[1]-0, 2) );
+			double eDistanceO2 = Math.sqrt( Math.pow(o2[0]-0, 2) + Math.pow(o2[1]-0, 2) );
+			
+			if ( eDistanceO1 < eDistanceO2 )
+				return -1;
+			else if ( eDistanceO1 > eDistanceO2 )
+				return 1;
+			else 
+				return 0;
+		}});
+	
+    public int[][] kClosest2(int[][] points, int K) {
     	int[][] answer = new int[K][];
+    	
+    	for(int[] point : points) {
+    		pQueue.add(point);
+    	}
+    	
+    	for(int i=0;i<K;i++) {
+    		answer[i] = pQueue.poll();
+    	}
+    	
     	return answer;
     }
-	
+
+    /********************/
+    /* fastest solution */
+    public int[][] kClosest(int[][] points, int K){
+        int len = points.length, l=0, r= len-1;
+        while(l<=r){
+            int mid = helper(points,l,r);
+            if(mid==K) break;
+            if(mid<K){
+                l = mid+1;
+            } else {
+                r = mid-1;
+            }
+        }
+        return Arrays.copyOfRange(points,0,K);
+    }
+    private int helper(int[][] A, int l, int r){
+        int[] pivot = A[l];
+        while(l<r){
+            while(l<r&&compare(A[r],pivot)>=0) r--;
+            A[l] = A[r];
+            while(l<r&&compare(A[l],pivot)<=0) l++;
+            A[r] = A[l];
+        }
+        A[l] = pivot;
+        return l;
+    }
+    
+    private int compare(int[] p1,int[] p2){
+        return p1[0]*p1[0]+p1[1]*p1[1]-p2[0]*p2[0]-p2[1]*p2[1];
+    } 
+    /* fastest solution */
+    /********************/
+    
     public void print(int[][] answer) {
     	for(int[] row: answer) {
-    		System.out.println(Arrays.toString(row));
+    		System.out.print(Arrays.toString(row) + " ");
     	}
+    	System.out.println();
     }
 
     public void run() {
-    	print(kClosest(new int[][] {{3,3},{5,-1},{-2,4}}, 1));
+    	print(kClosest(new int[][] {{3,3},{5,-1},{-2,4}}, 2));
+    	print(kClosest(new int[][] {{1,3},{-2,2}}, 1));
+    	print(kClosest(new int[][] {{6,10},{-3,3},{-2,5},{0,2}}, 3));
     }
 
 	public static void main(String[] args) {
