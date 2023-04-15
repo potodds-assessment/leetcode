@@ -28,6 +28,11 @@ import java.util.Set;
 public class Contains_Duplicate {
 
 // too slow
+
+    /*
+    time: O(n^2)
+    space: O(1)
+     */
     public boolean containsDuplicate_TooSlow(int[] nums) {
         for(int i=0; i<nums.length-1; i++) {
             for(int y=i+1; y<nums.length; y++) {
@@ -38,6 +43,10 @@ public class Contains_Duplicate {
         return false;
     }
 
+    /*
+    time: O(n log n)
+    space: O(n)
+     */
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> dupList = new HashSet<>();
 
