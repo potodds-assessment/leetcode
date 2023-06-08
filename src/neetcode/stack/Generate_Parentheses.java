@@ -15,19 +15,31 @@ Constraints:
 1 <= n <= 8
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Generate_Parentheses {
 
     Stack<String> s = new Stack<>();
-    Stack<String> result = new Stack<>();
+    List<String> result = new ArrayList<>();
+
+    private String convertToString() {
+        StringBuffer sb = new StringBuffer();
+        for (Iterator<String> it = s.iterator(); it.hasNext(); ) {
+            sb.append(it.next());
+        }
+        return sb.toString();
+    }
+
+    /*
+    Runtime 4ms beats 14.58%
+    Memory 42.3MB beats 91.99%
+    Time: O(n)
+    Space: O(n)
+     */
 
     private void backtrack(int openN, int closedN, int n) {
         if ( openN == closedN && closedN == n ) {
-            result.addAll(s);
+            result.add(String.join("", s.stream().toList()));
             return;
         }
 
@@ -42,8 +54,6 @@ public class Generate_Parentheses {
             backtrack( openN, closedN + 1, n);
             s.pop();
         }
-
-        backtrack(0,0, n);
     }
 
     public List<String> generateParenthesis(int n) {
@@ -53,6 +63,17 @@ public class Generate_Parentheses {
 
     public static void main(String[] args) {
         Generate_Parentheses app = new Generate_Parentheses();
-        System.out.println(app.generateParenthesis(2));
+
+        System.out.println(app.generateParenthesis(3));
+
+//        Stack<String> test = new Stack<>();
+//        test.push("(");
+//        test.push("(");
+//        test.push(")");
+//        test.push("(");
+//        test.push(")");
+//        test.push(")");
+//        System.out.println(test.toString());
+
     }
 }

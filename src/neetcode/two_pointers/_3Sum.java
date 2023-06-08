@@ -34,7 +34,11 @@ Constraints:
 import java.util.*;
 
 public class _3Sum {
-    public List<List<Integer>> threeSum(int[] nums) {
+
+    /*
+    brute force method O(n^3) is very slow
+     */
+    public List<List<Integer>> threeSum1(int[] nums) {
         if ( nums == null || nums.length == 0 )
             return null;
 
@@ -61,6 +65,42 @@ public class _3Sum {
         }
 
         return ans;
+    }
+
+    /*
+    Runtime 37ms beats 86.7%
+    Memory 51.1MB beats 5.83%
+    Time: O(n^2) -- 2 nested loops
+    Space: O(n) -- sorting could use O(n) space otherwise it's O(1)
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        Arrays.sort(nums);
+
+        for(int i=0; i<nums.length; i++) {
+            if ((i > 0) && nums[i] == nums[i-1])
+                continue;
+
+            int left = i+1;
+            int right = nums.length - 1;
+            while  (left < right) {
+                int threeSum = nums[i] + nums[left] + nums[right];
+                if (threeSum > 0)
+                    right -= 1;
+                else if (threeSum < 0)
+                    left += 1;
+                else {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left += 1;
+                    while (nums[left] == nums[left -1] && left < right) {
+                        left += 1;
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {

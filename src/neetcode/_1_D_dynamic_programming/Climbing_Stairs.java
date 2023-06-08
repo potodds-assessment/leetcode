@@ -1,4 +1,4 @@
-package neetcode._1_D_Dynamic_Programming;
+package neetcode._1_D_dynamic_programming;
 
 /*
 You are climbing a staircase. It takes n steps to reach the top.

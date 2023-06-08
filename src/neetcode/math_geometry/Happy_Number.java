@@ -1,4 +1,4 @@
-package neetcode.Math_Geometry;
+package neetcode.math_geometry;
 
 /*
 Write an algorithm to determine if a number n is happy.

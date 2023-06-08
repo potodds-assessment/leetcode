@@ -27,46 +27,28 @@ Both list1 and list2 are sorted in non-decreasing order.
 
 public class Merge_Two_Sorted_Lists {
 
-    public ListNode incrList(ListNode node, int target) {
-        if ( node == null )
-            return null;
-
-        ListNode tempNode = node;
-        while (tempNode != null && tempNode.val < target) {
-            tempNode = tempNode.next;
-        }
-
-        return tempNode;
-    }
-
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 
-        if ( list1 == null && list2 == null ) return null;
-        if ( list1 != null && list2 == null ) return list1;
-        if ( list1 == null && list2 != null ) return list2;
+        ListNode dummy = new ListNode();
+        ListNode tail = dummy;
 
-        ListNode head = list1.val <= list2.val ? list1 : list2;
-        ListNode prevNode1 = null;
-        ListNode prevNode2 = null;
-        ListNode ptr1 = list1;
-        ListNode ptr2 = list2;
-
-        while (ptr1 != null || ptr2 != null) {
-            if ( ptr1.val <= ptr2.val ) {
-                prevNode1 = ptr1;
-                ptr1 = ptr1.next;
+        while ( list1 != null && list2 != null ) {
+            if ( list1.val < list2.val ) {
+                tail.next = list1;
+                list1 = list1.next;
             } else {
-                prevNode1.next = ptr2;
-
-                prevNode2 = ptr2;
-                ptr2 = ptr2.next;
+                tail.next = list2;
+                list2 = list2.next;
             }
+            tail = tail.next;
         }
 
-//        printList(list1);
-//        printList(list2);
+        if ( list1 != null )
+            tail.next = list1;
+        else if ( list2 != null )
+            tail.next = list2;
 
-        return head;
+        return dummy.next;
     }
 
     public void printList(ListNode node) {
@@ -92,6 +74,9 @@ public class Merge_Two_Sorted_Lists {
         list5.next = list6;
         list6.next = list7;
 
+//        app.printList(list1);
+//        app.printList(list4);
+//        System.out.println("==");
         app.printList(app.mergeTwoLists(list1, list4));
     }
 }
