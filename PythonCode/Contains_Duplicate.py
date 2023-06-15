@@ -11,4 +11,4 @@ class Solution:
         return False
 
 ob = Solution()
-print( ob.containsDuplicate([ 1,2,3,4 ]) )
+print( ob.containsDuplicate([ 1,2,3,4,4  ]) )

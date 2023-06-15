@@ -1,0 +1,184 @@
+package leetcode._general_solutions_;
+
+import java.text.DateFormat;
+import java.util.*;
+
+public class graph {
+
+/********************************************************
+ ****** Union Find ******
+ https://leetcode.com/problems/friend-circles/
+ https://leetcode.com/problems/redundant-connection/
+ https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/
+ https://leetcode.com/problems/number-of-operations-to-make-network-connected/
+ https://leetcode.com/problems/satisfiability-of-equality-equations/
+ https://leetcode.com/problems/accounts-merge/
+ https://leetcode.com/problems/connecting-cities-with-minimum-cost/
+
+All the above problems can be solved by Union Find algorithm with minor tweaks.
+Below is a standard template for union find problems.
+ *****************************************************************/
+
+    int[] parent = new int[100];
+
+    int find(int x) {
+        return parent[x] == x ? x : find(parent[x]);
+    }
+
+    int[] findRedundantConnection(int[][] edges) {
+        int n = edges.length;
+
+        int[] temp = new int[n+1];
+        for(int i=0;i<=n;i++) {
+            temp[i] = i;
+        }
+        parent = temp;
+
+        int[] res = new int[2];
+        for(int i=0;i<n;i++) {
+            int x = find(edges[i][0]);
+            int y = find(edges[i][1]);
+            if (x != y)
+                parent[y] = x;
+            else {
+                res[0] = edges[i][0];
+                res[1] = edges[i][1];
+            }
+        }
+
+        return res;
+    }
+
+    /********************************************************
+     ****** Depth First Search ******
+     * Start DFS from nodes at boundary *
+     https://leetcode.com/problems/surrounded-regions/
+     https://leetcode.com/problems/number-of-enclaves/
+     *****************************************************************/
+    int rows, cols;
+    void dfs(int[][] A, int i, int j) {
+        if (i<0 || j<0 || i >= rows || j >= cols)
+            return;
+
+        if (A[i][i] != 1)
+            return;
+
+        A[i][j] = -1;
+        dfs(A, i+1, j);
+        dfs(A, i-1, j);
+        dfs(A, i, j+1);
+        dfs(A, i, j-1);
+    }
+
+    int numEnclaves(int[][] A) {
+        if (A == null || A.length == 0)
+            return 0;
+
+        rows = A.length;
+        cols = A[0].length;
+        for(int i=0;i<rows;i++) {
+            for(int j=0;j<cols;j++) {
+                if (i==0 || j==0 || i == rows-1 || j == cols-1)
+                    dfs(A, i, j);
+            }
+        }
+
+        int ans = 0;
+        for(int i=0;i<rows;i++) {
+            for(int j=0;j<cols;j++) {
+                if (A[i][i] == 1)
+                    ans++;
+            }
+        }
+
+        return ans;
+    }
+
+    /********************************************************
+     ****** Depth First Search ******
+     * Time taken to reach all nodes or share information to all graph nodes *
+     https://leetcode.com/problems/time-needed-to-inform-all-employees/
+     *****************************************************************/
+
+    void dfs(Map<Integer, List> hm, int i, int[] informTime, int res, int curr) {
+        curr += informTime[i];
+        res = Math.max(res, curr);
+
+        for(Iterator<Integer> it = hm.keySet().iterator(); it.hasNext();) {
+            int z = it.next();
+            dfs(hm, z, informTime, res, curr);
+        }
+    }
+
+    int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+        Map<Integer, List> hm = new HashMap<>();
+        for(int i=0;i<n;i++) {
+            if (manager[i] != -1)
+                hm.get(manager[i]).add(i);
+        }
+        int res = 0;
+        int curr = 0;
+        dfs(hm, headID, informTime, res, curr);
+        return res;
+    }
+
+    /********************************************************
+     ****** Depth First Search ******
+     * DFS from each unvisited node/Island problems *
+     https://leetcode.com/problems/number-of-closed-islands/
+     https://leetcode.com/problems/number-of-islands/
+     https://leetcode.com/problems/keys-and-rooms/
+     https://leetcode.com/problems/max-area-of-island/
+     https://leetcode.com/problems/flood-fill/
+     https://leetcode.com/problems/coloring-a-border/
+     *****************************************************************/
+
+    /********************************************************
+     ****** Depth First Search ******
+     * Cycle Find *
+     https://leetcode.com/problems/find-eventual-safe-states/
+     *****************************************************************/
+
+    /********************************************************
+     ****** Breadth First Search ******
+     * Shortest Path *
+     https://leetcode.com/problems/01-matrix/
+     https://leetcode.com/problems/as-far-from-land-as-possible/
+     https://leetcode.com/problems/rotting-oranges/
+     https://leetcode.com/problems/shortest-path-in-binary-matrix/
+
+     Start BFS from nodes from which shortest path is asked for.
+     Below is the sample BFS approach to find the path.
+     *****************************************************************/
+
+    /********************************************************
+     ****** Breadth First Search ******
+     * Graph coloring/Bipartition *
+     https://leetcode.com/problems/possible-bipartition/
+     https://leetcode.com/problems/is-graph-bipartite/
+
+     Problems asks to check if its possible to divide the graph nodes into 2 groups
+     Apply BFS for same. Below is a sample graph coloring approach.
+     *****************************************************************/
+
+    /********************************************************
+     ****** Topological Sort ******
+     * Check if its directed acyclic graph and we have to arrange the elements in an order in which we
+     * need to select the most independent node at first. Number of in-node 0 *
+     https://leetcode.com/problems/course-schedule/
+     https://leetcode.com/problems/course-schedule-ii/
+
+     Below is sample approach. Find if cycle is present, if not apply topological sort.
+     *****************************************************************/
+
+    /********************************************************
+     ****** Find Shortest Path (Dijkstra's/Bellman Ford) ******
+     https://leetcode.com/problems/network-delay-time/
+     https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/
+     https://leetcode.com/problems/cheapest-flights-within-k-stops/
+     *****************************************************************/
+
+    public static void main(String[] args) {
+        System.out.println("Compiled and running[" + DateFormat.getTimeInstance().format(System.currentTimeMillis()) + "]");
+    }
+}
