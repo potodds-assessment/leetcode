@@ -15,6 +15,10 @@ func main() {
 
 	fmt.Println(fact(7))
 
+	go func() {
+		println("Hello, Goroutines!")
+	}()
+
 	var fib func(n int) int
 
 	fib = func(n int) int {
