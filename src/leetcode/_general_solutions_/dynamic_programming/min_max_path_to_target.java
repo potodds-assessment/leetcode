@@ -216,7 +216,7 @@ public class min_max_path_to_target {
         ////////////////////////////////////////////////////////////
         // 64. Minimum Path Sum
         ////////////////////////////////////////////////////////////
-//        System.out.println(app.minPathSum_i(new int[][]{{1,3,1},{1,5,1,},{4,2,1}}) == 7);
+        System.out.println(app.minPathSum_i(new int[][]{{1,3,1},{1,5,1,},{4,2,1}}) == 7);
 
         //        app.stream_init_array();
     }
