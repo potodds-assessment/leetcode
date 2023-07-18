@@ -1,4 +1,4 @@
-package leetcode.sort_search;
+package leetcode.searching;
 
 /*
 Completed: 2/16/2021

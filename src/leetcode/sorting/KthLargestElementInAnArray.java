@@ -1,4 +1,4 @@
-package leetcode.sort_search;
+package leetcode.sorting;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;

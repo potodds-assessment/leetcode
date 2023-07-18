@@ -1,4 +1,4 @@
-package leetcode.binary_search;
+package leetcode.searching;
 
 /*
 Given an array of integers nums which is sorted in ascending order, and an integer target,
