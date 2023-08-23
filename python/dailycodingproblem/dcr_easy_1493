@@ -1,0 +1,9 @@
+
+def pythagorean_triplet(lst):
+    lst.sort()
+    for x, xVal in enumerate(lst):
+        for yVal in lst[x+1:]:
+            print(xVal, yVal)
+        
+
+pythagorean_triplet([1,100, 2,3,4,5,6, 10])
