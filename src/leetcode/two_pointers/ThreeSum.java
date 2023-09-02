@@ -77,6 +77,12 @@ public class ThreeSum {
     Memory 51.1MB beats 5.83%
     Time: O(n^2) -- 2 nested loops
     Space: O(n) -- sorting could use O(n) space otherwise it's O(1)
+
+    1. Sort list of nums[]
+    2. iterate list with i.  left_index = i+1, right_index = length-1
+    3. while loop for left_index < right_index, check if i + left_index + right_index == 0
+    4. if sum < 0, incr left_index.  if sum > 0, decr right_index
+    5. if sum == 0, add values to solution map.  incr left_index.  optimize, while loop to incr left_index if left_index == left_index-1    
      */
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();

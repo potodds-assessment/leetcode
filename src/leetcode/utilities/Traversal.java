@@ -1,4 +1,4 @@
-package leetcode.trees;
+package leetcode.utilities;
 
 public class Traversal {
 
