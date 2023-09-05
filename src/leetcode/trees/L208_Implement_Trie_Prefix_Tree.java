@@ -93,11 +93,11 @@ public class L208_Implement_Trie_Prefix_Tree {
         L208_Implement_Trie_Prefix_Tree trie = new L208_Implement_Trie_Prefix_Tree();
 
     trie.insert("apple");
-    trie.search("apple");   // return True
-    trie.search("app");     // return False
-    trie.startsWith("app"); // return True
+    System.out.println(trie.search("apple") == true);   // return True
+    System.out.println(trie.search("app") == false);     // return False
+    System.out.println(trie.startsWith("app") == true); // return True
     trie.insert("app");
-    trie.search("app");     // return True
+    System.out.println(trie.search("app") == true);     // return True
 
     }
 }
