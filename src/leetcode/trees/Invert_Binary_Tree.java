@@ -3,6 +3,8 @@ package leetcode.trees;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+import leetcode.utilities.TreeNode;
+
 /*
 Given the root of a binary tree, invert the tree, and return its root.
 

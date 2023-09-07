@@ -1,9 +1,7 @@
 package leetcode.backtracking;
 
-import java.util.Arrays;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.List;
 
 /*
 Given an m x n grid of characters board and a string word, return true if word exists in the grid.
@@ -56,6 +54,7 @@ public class L79_Word_Search {
             dfs(row - 1, col, wIndex+1) ||
             dfs(row, col + 1, wIndex+1) ||
             dfs(row, col - 1, wIndex+1));
+        visited.remove(coord);
 
         return res;
     }
@@ -74,8 +73,9 @@ public class L79_Word_Search {
 
         for(int row = 0; row < board.length; row++) {
             for(int col = 0; col < board[row].length; col++) {
-                if (dfs(row, col, 0))
+                if (dfs(row, col, 0)) {
                     return true;
+                }
             }
         }
         return false;
@@ -116,5 +116,6 @@ public class L79_Word_Search {
         System.out.println(app.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCCED"));
         System.out.println(app.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "SEE"));
         System.out.println(app.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCB"));
+        System.out.println(app.exist(new char[][]{{'C','A','A'},{'A','A','A'},{'B','C','D'}}, "AAB"));
     }
 }
