@@ -1,0 +1,14 @@
+
+
+print("hello")
+
+def find_duplicate(lst):
+    sum, sum2 = 0, 0
+
+    for index, value in enumerate(lst):
+        sum += value
+        sum2 += index
+    
+    print(sum, sum2, sum-sum2)
+
+find_duplicate([1,2,3,4,5,6,7,8,7])

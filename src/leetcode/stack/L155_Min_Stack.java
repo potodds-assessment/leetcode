@@ -39,7 +39,7 @@ At most 3 * 104 calls will be made to push, pop, top, and getMin.
 
 import java.util.Stack;
 
-public class Min_Stack {
+public class L155_Min_Stack {
 
     /*
     Runtime: 175ms beats 5.8%
@@ -56,7 +56,7 @@ public class Min_Stack {
     Stack<Integer> minS;
     int lastVal;
 
-    public Min_Stack() {
+    public L155_Min_Stack() {
         s = new Stack<>();
         minS = new Stack<>();
     }
@@ -93,10 +93,10 @@ public class Min_Stack {
         System.out.println(Min_Stack.top()); // return -2
         System.out.println(Min_Stack.getMin()); // return -2
 */
-        Min_Stack Min_Stack = new Min_Stack();
-        Min_Stack.push(2);
+        L155_Min_Stack Min_Stack = new L155_Min_Stack();
+        Min_Stack.push(-2);
         Min_Stack.push(0);
-        Min_Stack.push(3);
+        Min_Stack.push(-3);
         System.out.println(Min_Stack.getMin()); // return -3
         Min_Stack.pop();
         System.out.println(Min_Stack.getMin()); // return -3
