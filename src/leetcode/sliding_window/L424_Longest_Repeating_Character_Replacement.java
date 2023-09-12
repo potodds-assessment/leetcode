@@ -37,28 +37,30 @@ public class L424_Longest_Repeating_Character_Replacement {
      */
     public int characterReplacement(String s, int k) {
         Map<Character, Integer> count = new HashMap<>();
-        int res = 0;
+        int longestCount = 0;
 
-        int l = 0;
-        int maxf = 0;
+        int lIndex = 0;
+        int mostFreqChar = 0;
 
-        for(int r=0; r<s.length(); r++) {
-            count.merge(s.charAt(r), 1, Integer::sum);
-            maxf = Math.max(maxf, count.get(s.charAt(r)));
+        for(int rIndex=0; rIndex<s.length(); rIndex++) {
+            count.merge(s.charAt(rIndex), 1, Integer::sum);
+            mostFreqChar = Math.max(mostFreqChar, count.get(s.charAt(rIndex)));
 
-            while (((r - l + 1) - maxf) > k) {
-                count.merge(s.charAt(l), 1, (prev, one)-> prev - 1);
-                l++;
+            //rIndex - lIndex + 1 == window
+            while (((rIndex - lIndex + 1) - mostFreqChar) > k) {
+                count.merge(s.charAt(lIndex), 1, (prev, one)-> prev - 1);
+                lIndex++;
             }
-            res = Math.max(res, r-l+1);
+            longestCount = Math.max(longestCount, rIndex-lIndex+1);
         }
 
-        return res;  
+        return longestCount;  
     }
 
     public static void main(String[] args) {
         L424_Longest_Repeating_Character_Replacement app = new L424_Longest_Repeating_Character_Replacement();
-        System.out.println(app.characterReplacement("ABAB", 4) == 4);
         System.out.println(app.characterReplacement("ABCDABA", 1) == 3);
+        System.out.println(app.characterReplacement("ABAB", 4) == 4);
+        System.out.println(app.characterReplacement("ABABBACDEFGHZYHHH", 2) == 6);
     }
 }
