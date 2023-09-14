@@ -48,7 +48,7 @@ Constraints:
 0 <= value <= 104
 At most 3 * 104 calls will be made to get and put. 
  */
-public class LRUCache {
+public class L146_LRU_Cache {
 	
 	AtomicLong counter = new AtomicLong(); 
 
@@ -69,7 +69,7 @@ public class LRUCache {
 	Map<LRKey, Integer> keyValueLookup = new HashMap<>();
 	int capacity;
 	
-    public LRUCache(int capacity) {
+    public L146_LRU_Cache(int capacity) {
         this.capacity = capacity;
     }
     
@@ -122,7 +122,7 @@ public class LRUCache {
 //    	System.out.println(lRUCache.get(3));    // return 3
 //    	System.out.println(lRUCache.get(4));    // return 4
 
-    	LRUCache lRUCache = new LRUCache(2);
+    	L146_LRU_Cache lRUCache = new L146_LRU_Cache(2);
     	lRUCache.put(2, 1); 
     	lRUCache.put(1, 1); 
     	lRUCache.put(2, 3); 
