@@ -24,8 +24,8 @@ n == matrix[i].length
 public class L54_Spiral_Matrix {
 
     /*
-    Runtime: ms, beats %
-    Memory: MB, beats %
+    Runtime: 0ms, beats 100%
+    Memory: 40.32MB, beats 80.48%
 
     time: O(m*n)
     space: O(1)
