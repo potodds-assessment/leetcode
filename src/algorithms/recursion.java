@@ -8,7 +8,7 @@ package algorithms;
  * Towers of Hanoi: A Complete Recursive Visualization
  * https://www.youtube.com/watch?v=rf6uf3jNjbo&list=WL&index=8
  */
-public class recursion {
+public class Recursion {
 
     /*
      * Write recursive function to sum all non-negative integers up to n
@@ -65,7 +65,7 @@ public class recursion {
     }
 
     public static void main(String[] args) {
-        recursion app = new recursion();
+        Recursion app = new Recursion();
         System.out.println(app.sum(2) == 3);    
         System.out.println(app.sum(3) == 6);    
         System.out.println(app.sum(4) == 10);    
