@@ -1,5 +1,7 @@
 package leetcode.trees;
 
+import leetcode.utilities.TreeNode;
+
 /////////////////////////////////////////////////////////////
 // 98. Validate Binary Search Tree
 // https://leetcode.com/problems/validate-binary-search-tree/
