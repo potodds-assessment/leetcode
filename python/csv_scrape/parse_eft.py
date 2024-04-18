@@ -1,5 +1,4 @@
 import csv
-import requests
 import urllib
 import datetime
 import requests                  # [handles the http interactions](http://docs.python-requests.org/en/master/) 
