@@ -1,0 +1,79 @@
+
+Download CSV link
+https://query1.finance.yahoo.com/v7/finance/download/SPY?period1=728265600&period2=1702684800&interval=1d&events=history&includeAdjustedClose=true
+
+period1=728265600
+period2=1702684800
+interval=1d
+events=history
+includeAdjustedClose=true
+
+Historical Price page
+https://finance.yahoo.com/quote/SPY/history?period1=728265600&period2=1702684800&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true
+period1=728265600
+period2=1702684800
+interval=1d
+filter=history
+frequency=1d
+includeAdjustedClose=true
+
+https://finance.yahoo.com/quote/GFAI/history?period1=728265600&period2=1702684800&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true
+https://finance.yahoo.com/quote/SPY/history?
+period1=1544918400
+period2=1702684800
+interval=1d
+filter=history
+frequency=1d
+includeAdjustedClose=true
+
+
+https://finance.yahoo.com/quote/GFAI/history?period1=728265600&period2=1702684800&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true
+
+
+1. call webpage to get full CSV history: query1.finance.yahoo.com
+2. parse data into yearly data.  symbol, year, open, hi, low, close.
+3. save data as CSV file format
+
+
+import requests
+req = requests.get("https://...")
+url_content = req.content
+csv_file = open('file.csv', 'wb')
+csv_file.write(url_content)
+csv.file_close()
+
+==============================================================
+= Using Python built-in libraries to parse url csv data
+==============================================================
+import urllib.request
+import csv
+
+def parse_url_csv(url):
+  with urllib.request.urlopen(url) as response:
+    data = response.read().decode("utf-8")
+
+  reader = csv.reader(io.StringIO(data))
+  return list(reader)
+
+url = "https://example.com/data.csv"
+csv_data = parse_url_csv(url)
+
+for row in csv_data:
+  print(row)
+==============================================================
+
+
+==============================================================
+= Using Panda to parse url csv data
+==============================================================
+import pandas as pd
+
+def parse_url_csv(url):
+  return pd.read_csv(url)
+
+url = "https://example.com/data.csv"
+df = parse_url_csv(url)
+
+print(df.head())
+print(df["column_name"])
+==============================================================
