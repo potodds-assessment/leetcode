@@ -17,6 +17,13 @@ import sys
 #  4. INTEGER v2
 #
 
+##########################
+## Solution Explanation:
+## Save prior difference between x1 current value and x2 current value ie priorRate
+## compare next difference with priorRate, if it's increasing then stop with failure
+## also keep list of either x1 values or x2 values and for each x1 or x2 value check if it is in the list, if it is return success
+##########################
+
 def kangaroo(x1, v1, x2, v2):
     decreasingRate = True
     priorRate = 0
