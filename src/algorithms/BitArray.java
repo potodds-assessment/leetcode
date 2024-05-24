@@ -2,6 +2,14 @@ package algorithms;
 
 import java.util.BitSet;
 
+/*
+ * BitSet Implementation
+ * boolean getBit(int pos) - get the bit at position pos
+ * void setBit(int pos, boolean b) - set the bit at position pos to b
+ * 
+ * Java BitSet Implementation 
+ */
+
 public class BitArray {
     private static final int ALL_ONES = 0xFFFFFFFF;
     private static final int WORD_SIZE = 32;

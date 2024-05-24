@@ -2,10 +2,11 @@ package algorithms;
 
 import java.util.Arrays;
 
+/*
+* MergeSort uses algorithm that recursively splits array in half until there is only one element in each half.  Then it merges/sort each half.
+*/
+
 public class MergeSort {
-    /*
-     * MergeSort uses algorithm that recursively splits array in half until there is only one element in each half.  Then it merges/sort each half.
-     */
 
     public int[] merge(int[] left, int[] right) {
         System.out.println("left:" + Arrays.toString(left) + ",right:" + Arrays.toString(right));

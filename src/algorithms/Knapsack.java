@@ -1,6 +1,9 @@
 package algorithms;
 
-import java.util.Arrays;
+/*
+ * Knapsack Problem
+ * Given weights and values of n items, put these items in a knapsack of capacity W to get the maximum total value in the knapsack.
+ */
 
 public class Knapsack {    
     static int knapSack(int W, int wt[], int val[], int n) { 
